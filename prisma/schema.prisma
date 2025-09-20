@@ -27,3 +27,23 @@ enum Role {
   USER
 }
 
+model Company {
+  id        String        @id @default(uuid())
+  name      String
+  createdAt DateTime      @default(now())
+  files     CompanyFile[]
+}
+
+model CompanyFile {
+  id        String   @id @default(uuid())
+  companyId String
+  filename  String
+  path      String
+  url       String?   // public url or signed url
+  size      Int?
+  mime      String?
+  createdAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+  @@index([companyId])
+}

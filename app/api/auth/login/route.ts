@@ -14,8 +14,7 @@ export async function POST(req: Request) {
   if (!isValid) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
-
-  // 👇 include role in response
+  
   return NextResponse.json({
     message: "Login successful",
     user: { id: user.id, email: user.email, role: user.role },
